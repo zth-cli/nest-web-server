@@ -1,0 +1,70 @@
+<!--
+ * @Author: rzx007
+ * @Date: 2021-04-13 16:57:45
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-06-08 16:45:29
+ * @FilePath: \koa2-blog\views\admin\login.html
+ * @Description: Do not edit
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{{title}}</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>{{title}}</h2>
+      <p>
+        <label>用户:</label>
+        <input type="text" id="user" />
+      </p>
+      <p>
+        <label>密码:</label>
+        <input type="password" id="pass" />
+      </p>
+
+      <p>
+        <label>上传:</label>
+        <input type="file" id="file" multiple />
+      </p>
+      <p>
+        <button id="btn">登录</button>
+      </p>
+      <form method="POST" action="/signup" enctype="multipart/form-data">
+        title: <input name="title" />
+        file1: <input name="file1" type="file" />
+        file2: <input name="file2" type="file" />
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    $(function () {
+      $("#btn").click(function () {
+        var formData = new FormData();
+        formData.append("files", $("#file")[0].files[0]);
+        formData.append("username", $("#user").val());
+        formData.append("password", $("#pass").val());
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/signin",
+          contentType: "application/json;charset=utf-8",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (message) {
+            alert("登录成功" + JSON.stringify(message));
+          },
+          error: function (message) {
+            alert("提交失败" + JSON.stringify(message));
+          },
+        });
+      });
+    });
+  </script>
+</html>
