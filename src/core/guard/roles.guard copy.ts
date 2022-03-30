@@ -13,9 +13,7 @@ export class RolesGuard implements CanActivate {
   // 白名单, 直接放行
   private urlList: string[] = ['user/login'];
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     console.log('进入全局权限守卫...');
     // 获取请求对象
     const request = context.switchToHttp().getRequest();
@@ -30,16 +28,10 @@ export class RolesGuard implements CanActivate {
         // 这里可以添加验证逻辑
         return true;
       } catch (error) {
-        throw new HttpException(
-          '没有访问权限，请先登录',
-          HttpStatus.UNAUTHORIZED,
-        );
+        throw new HttpException('没有访问权限，请先登录', HttpStatus.UNAUTHORIZED);
       }
     } else {
-      throw new HttpException(
-        '没有访问权限，请先登录',
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new HttpException('没有访问权限，请先登录', HttpStatus.UNAUTHORIZED);
     }
   }
 }

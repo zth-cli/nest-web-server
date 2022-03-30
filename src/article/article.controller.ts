@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FindOneOptions } from 'typeorm';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -28,7 +20,7 @@ export class ArticleController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: FindOneOptions<Article>) {
+  findOne(@Param('id') id: number) {
     return this.articleService.findOne(id);
   }
 

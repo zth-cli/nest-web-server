@@ -20,9 +20,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     console.log('~~~进入异常拦截器~~~');
     // 获取异常状态码
     const status =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR;
+      exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
     // 设置错误信息
     const message = exception.message
       ? exception.message
@@ -35,9 +33,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
       path: request.url,
       message,
     };
-
     Logger.error('错误消息', JSON.stringify(msgLog), 'HttpExceptionFilter');
     // 设置返回的状态码， 请求头，发送错误信息
-    response.status(status).json(msgLog);
+    if (status === 404) {
+      response.render('404/index');
+    } else {
+      response.status(status).json(msgLog);
+    }
   }
 }

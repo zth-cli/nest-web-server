@@ -11,7 +11,7 @@
       <div class="passage-meta">
         <span><i class="iconfont">&#xe66c;</i>{{item.create_time}} </span>
         <span>|<i class="iconfont">&#xe61d;</i> 
-            {% if item.invisible %}
+            {% if item.state %}
             UNLOCK
             {% else %}
             LOCK
@@ -19,18 +19,18 @@
         </span>
        </div>
        <h1 class="home-article-title">
-            <a href="/article/{{item.id}}">{{item.title}}</a>
+            <a href="/admin/{{item.id}}">{{item.title}}</a>
         </h1>
         <div class="home-article-content">
             {{item.detail | safe}}
         </div>
-        <a class="home-article-read" href="/article/{{item.id}}">
+        <a class="home-article-read" href="/admin/{{item.id}}">
             README MORE &gt;&gt;&gt;
         </a>
          {% if item.tags.length %}
         <div class="passage-tags">
             {% for ele in item.tags %}
-                <a href="/tag/{{ele.id}}"><i class="iconfont">&#xe658;</i>{{ele.title}}</a>
+                <a href="/tag/{{ele.id}}"><i class="iconfont">&#xe658;</i>{{ele.name}}</a>
             {% endfor %}
         </div> 
         {% endif %}  

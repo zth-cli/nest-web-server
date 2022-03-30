@@ -20,7 +20,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       return true;
     }
 
-    // @SkipJwtAuth() 注解的控制器直接放行
+    // @SkipAuth() 注解的控制器直接放行
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),

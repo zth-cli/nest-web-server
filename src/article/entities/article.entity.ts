@@ -1,13 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  ManyToMany,
-  JoinTable,
-  ManyToOne,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 import { Tag } from 'src/tag/entities/tag.entity';
 import { User } from 'src/user/entities/user.entity';
 
@@ -27,8 +18,11 @@ export class Article {
   @Column('int')
   update_time: number;
 
-  @Column('varchar')
+  @Column('text')
   content: string;
+
+  @Column('varchar')
+  detail: string;
 
   @Column('varchar')
   desc: string;

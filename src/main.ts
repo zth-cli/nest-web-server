@@ -23,7 +23,7 @@ async function bootstrap() {
   // 静态资源
   app.useStaticAssets(join(__dirname, '..', './public'), {
     prefix: '/static', // 设置虚拟路径
-  }); // http://localhost:3200/static/xxx.png
+  }); // http://localhost:3300/static/xxx.png
 
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
 
@@ -50,7 +50,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
-  await app.listen(3400, async () => {
+
+  await app.listen(3300, async () => {
     console.log(`Application is running on: ${await app.getUrl()}`);
   });
 }

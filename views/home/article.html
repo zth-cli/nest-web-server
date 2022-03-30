@@ -1,17 +1,17 @@
 {% extends "parent.html" %}
 
 {% block head %}
-<title>{{list.title}}</title>
-<link rel='stylesheet' href='/libs/prism/prism.css' />
+<title>{{list.name}}</title>
+<link rel='stylesheet' href='/static/libs/prism/prism.css' />
 {% endblock %}
 
 {% block content %}
-<script src="/libs/prism/prism.js"></script>
+<script src="/static/libs/prism/prism.js"></script>
 <div class="home">
     <div class="passage-meta">
        <span><i class="iconfont">&#xe66c;</i>{{list.create_time}} </span>
         <span>|<i class="iconfont">&#xe61d;</i> 
-            {% if list.invisible %}
+            {% if list.state %}
             UNLOCK
             {% else %}
             LOCK
@@ -20,7 +20,7 @@
     </div>
     <h1 class="article_title">{{list.title}}</h1>
     <div class="article_content">
-        {{list.content | safe }}
+        {{list.detail | safe }}
     </div>
 </div>
 {% endblock %}

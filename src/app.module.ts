@@ -35,10 +35,10 @@ import { AdminModule } from './admin/admin.module';
   providers: [
     AppService,
     // 全局守卫,数组位置决定执行顺序
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
     {
       provide: APP_GUARD,
       useClass: RolesGuard,

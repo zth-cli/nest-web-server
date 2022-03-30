@@ -16,10 +16,10 @@ export class ArticleService {
   }
 
   findAll() {
-    return this.articleRepository.find();
+    return this.articleRepository.find({ relations: ['tags'] });
   }
 
-  findOne(id: FindOneOptions<Article>) {
+  findOne(id: number) {
     return this.articleRepository.findOne(id);
   }
 
