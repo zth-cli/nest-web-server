@@ -12,7 +12,7 @@ import { RolesGuard } from './core/guard/roles.guard';
 import { AdminController } from './admin/admin.controller';
 import { AdminService } from './admin/admin.service';
 import { AdminModule } from './admin/admin.module';
-import envConfig from '../utils/env';
+import envConfig from './config/env';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
