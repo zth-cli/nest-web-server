@@ -1,7 +1,7 @@
 /*
  * @Author: 阮志雄
  * @Date: 2022-03-29 16:56:35
- * @LastEditTime: 2022-04-03 22:02:31
+ * @LastEditTime: 2022-04-03 22:17:57
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
  * @FilePath: \nestjs-web-server\src\admin\admin.controller.ts
@@ -32,7 +32,7 @@ export class AdminController {
   // @Render('index')
   @SkipAuth()
   async findAll(@Res() res: Response) {
-    console.log(this.configService.get<string>('NODE_NEV'));
+    console.log(this.configService.get<string>('DATABASE_USER'));
 
     const data = await this.articleService.findAll();
     return res.render('home/index', { data });
