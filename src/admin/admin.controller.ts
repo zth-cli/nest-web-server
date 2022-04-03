@@ -1,7 +1,7 @@
 /*
  * @Author: 阮志雄
  * @Date: 2022-03-29 16:56:35
- * @LastEditTime: 2022-03-30 09:38:37
+ * @LastEditTime: 2022-04-03 21:34:58
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
  * @FilePath: \nestjs-web-server\src\admin\admin.controller.ts
@@ -13,12 +13,14 @@ import { SkipAuth } from 'src/auth/constants';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('admin')
 export class AdminController {
   constructor(
     private readonly adminService: AdminService,
     private readonly articleService: ArticleService,
+    private readonly configService: ConfigService,
   ) {}
 
   @Post()
@@ -30,6 +32,8 @@ export class AdminController {
   // @Render('index')
   @SkipAuth()
   async findAll(@Res() res: Response) {
+    console.log(this.configService.get<string>('NODE_NEV'));
+
     const data = await this.articleService.findAll();
     return res.render('home/index', { data });
   }

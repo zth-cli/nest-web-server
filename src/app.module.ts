@@ -12,18 +12,28 @@ import { RolesGuard } from './core/guard/roles.guard';
 import { AdminController } from './admin/admin.controller';
 import { AdminService } from './admin/admin.service';
 import { AdminModule } from './admin/admin.module';
+import envConfig from '../utils/env';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'nestweb',
-      autoLoadEntities: true, // 自定导入实体类
-      // synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true, // 设置为全局
+      envFilePath: [envConfig.path],
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get('DATABASE_HOST', 'localhost'),
+        port: 3306,
+        username: 'root',
+        password: 'root',
+        database: 'nestweb',
+        autoLoadEntities: true, // 自定导入实体类
+        // synchronize: true,})
+      }),
     }),
     UserModule,
     TagModule,
